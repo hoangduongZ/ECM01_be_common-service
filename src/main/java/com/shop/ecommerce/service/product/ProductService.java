@@ -31,8 +31,8 @@ public class ProductService implements IProductService {
                                                    Boolean isFeatured, int page, int size, String[] sort) {
         Sort sorting = buildSort(sort);
         Pageable pageable = PageRequest.of(page, size, sorting);
-        Page<Product> products = productRepository.filterProducts(search,categorySlug,brandSlug,
-                minPrice, maxPrice, inStock,pageable);
+        Page<Product> products = productRepository.filterProducts(search, categorySlug, brandSlug,
+                minPrice, maxPrice, inStock, pageable);
         return products.map(productMapper::toProductResponse);
     }
 

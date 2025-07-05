@@ -2,11 +2,11 @@ package com.shop.ecommerce.kafka.event;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
-
-
-public class UserCreatedEvent implements Serializable {
+public class UserSummaryEvent implements Serializable {
     private Long userId;
+    private UUID uuid;
     private String email;
     private String firstName;
     private String lastName;
@@ -14,11 +14,19 @@ public class UserCreatedEvent implements Serializable {
     private String role;
     private ZonedDateTime createdAt;
 
-    public UserCreatedEvent(Long userId, String email, String role, ZonedDateTime createdAt) {
+    public UserSummaryEvent(Long userId, String email, String role, ZonedDateTime createdAt) {
         this.userId = userId;
         this.email = email;
         this.role = role;
         this.createdAt = createdAt;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     public String getFirstName() {

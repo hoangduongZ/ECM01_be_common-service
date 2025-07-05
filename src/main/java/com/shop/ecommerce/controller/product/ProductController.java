@@ -1,16 +1,20 @@
-package com.shop.ecommerce.controller.admin;
+package com.shop.ecommerce.controller.product;
 
 import com.shop.ecommerce.dtos.ProductResponseDTO;
 import com.shop.ecommerce.service.product.IProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
-
+/*
+* product public API
+* */
 @RestController
 @RequestMapping("${api.version}/products")
 public class ProductController {
@@ -39,4 +43,9 @@ public class ProductController {
         return ResponseEntity.ok(productsPage);
     }
 
+    @PreAuthorize("hasRole('CUSTOMER')")
+    @GetMapping("test")
+    public ResponseEntity<?> test(){
+        return ResponseEntity.ok("Test success!");
+    }
 }
