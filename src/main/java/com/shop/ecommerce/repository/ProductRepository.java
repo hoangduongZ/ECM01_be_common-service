@@ -41,4 +41,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
                                   @Param("inStock") Boolean inStock,
                                   Pageable pageable
     );
+
+    boolean existsBySlug(String slug);
 }

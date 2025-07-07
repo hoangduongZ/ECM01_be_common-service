@@ -2,6 +2,9 @@ package com.shop.ecommerce.controller.product;
 
 import com.shop.ecommerce.dtos.ProductResponseDTO;
 import com.shop.ecommerce.service.product.IProductService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,6 +20,8 @@ import java.math.BigDecimal;
 * */
 @RestController
 @RequestMapping("${api.version}/products")
+@Tag(name = "Product-Public", description = "Product product APIs")
+//@SecurityRequirement(name = "bearerAuth")
 public class ProductController {
     private final IProductService productService;
 
@@ -25,6 +30,7 @@ public class ProductController {
     }
 
     @GetMapping
+    @Operation(summary = "Paging product")
     public ResponseEntity<Page<ProductResponseDTO>> getAllProducts(
             @RequestParam(required = false) String search, // Tìm kiếm theo tên/mô tả ngắn
             @RequestParam(required = false) String categorySlug, // Lọc theo slug danh mục

@@ -1,32 +1,32 @@
 package com.shop.ecommerce.mapper;
 
 import com.shop.ecommerce.dtos.ProductResponseDTO;
+import com.shop.ecommerce.dtos.request.ProductCreateRequestDTO;
 import com.shop.ecommerce.model.Product;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public abstract class ProductMapper {
     public ProductResponseDTO toProductResponse(Product product){
-        ProductResponseDTO dto = new ProductResponseDTO();
-        dto.setId(product.getId());
-        dto.setName(product.getName());
-        dto.setSlug(product.getSlug());
-        dto.setShortDescription(product.getShortDescription());
-        dto.setFeaturedImageUrl(product.getFeaturedImageUrl());
-        dto.setPrice(product.getPrice());
-        dto.setComparePrice(product.getComparePrice());
-        dto.setPriceHidden(product.isPriceHidden());
-        dto.setStatus(product.getStatus());
-        dto.setFeatured(product.getFeatured());
-        dto.setRatingAverage(product.getRatingAverage());
-        dto.setRatingCount(product.getRatingCount());
-
-        if (product.getCategory() != null) {
-            dto.setCategoryName(product.getCategory().getName());
-        };
-        if (product.getBrand() != null) {
-            dto.setBrandName(product.getBrand().getName());
-        }
+        ProductResponseDTO dto = new ProductResponseDTO(
+                product.getUuid(), product.getName(),
+                product.getSlug(),product.getShortDescription(),
+                product.getFeaturedImageUrl(), product.getPrice(),
+                product.getComparePrice(), product.isPriceHidden(),
+                product.getStatus(), product.getFeatured(),
+                product.getRatingAverage(), product.getRatingCount(),
+                product.getBrand().getName(), product.getCategory().getName()
+        );
         return dto;
+    }
+
+    public Product productRequestToEntity(ProductCreateRequestDTO dto){
+        Product product = new Product();
+        product.setName(dto.getName());
+        product.setShortDescription(dto.getShortDescription());
+        product.setDescription(dto.getDescription());
+        product.setPrice(dto.getPrice());
+        product.setComparePrice(dto.getComparePrice());
+        return product;
     }
 }

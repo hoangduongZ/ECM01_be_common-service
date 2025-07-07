@@ -99,7 +99,7 @@ public class Product extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", length = 20)
-    private ProductStatus status = ProductStatus.draft;
+    private ProductStatus status = ProductStatus.DRAFT;
 
 //    San pham noi bat
     @Column(name = "is_featured")
@@ -131,7 +131,7 @@ public class Product extends BaseEntity {
 
 
     public enum ProductStatus {
-        draft, active, inactive, out_of_stock
+        DRAFT, ACTIVE, INACTIVE, OUT_OF_STOCK
     }
 
     // Constructors

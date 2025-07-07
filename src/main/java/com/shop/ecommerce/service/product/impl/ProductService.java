@@ -1,9 +1,10 @@
-package com.shop.ecommerce.service.product;
+package com.shop.ecommerce.service.product.impl;
 
 import com.shop.ecommerce.dtos.ProductResponseDTO;
 import com.shop.ecommerce.mapper.ProductMapper;
 import com.shop.ecommerce.model.Product;
 import com.shop.ecommerce.repository.ProductRepository;
+import com.shop.ecommerce.service.product.IProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
