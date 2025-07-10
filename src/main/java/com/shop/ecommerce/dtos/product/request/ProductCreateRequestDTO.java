@@ -1,7 +1,6 @@
-package com.shop.ecommerce.dtos.request;
+package com.shop.ecommerce.dtos.product.request;
 
 import com.shop.ecommerce.model.Product;
-import com.shop.ecommerce.validation.UniqueSlug;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -9,8 +8,6 @@ import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 public class ProductCreateRequestDTO {
-
-
     @Schema(description = "Tên sản phẩm", example = "iPhone 15", required = true)
     @NotBlank
     private String name;
@@ -94,19 +91,54 @@ public class ProductCreateRequestDTO {
     @Schema(description = "Ẩn giá sản phẩm?", example = "false", defaultValue = "false")
     private Boolean isPriceHidden = false;
 
-    public @NotBlank String getName() {
+    public ProductCreateRequestDTO(String name, String slug, String shortDescription, String description,
+                                   String sku, Long brandId, Long categoryId, BigDecimal price,
+                                   BigDecimal comparePrice, BigDecimal costPrice, Boolean trackInventory,
+                                   Integer inventoryQuantity, Boolean allowBackorder, Integer lowStockThreshold,
+                                   BigDecimal weight, BigDecimal length, BigDecimal width, BigDecimal height,
+                                   String metaTitle, String metaDescription, String featuredImageUrl,
+                                   String galleryImages, Product.ProductStatus status, Boolean isFeatured,
+                                   Boolean isPriceHidden) {
+        this.name = name;
+        this.slug = slug;
+        this.shortDescription = shortDescription;
+        this.description = description;
+        this.sku = sku;
+        this.brandId = brandId;
+        this.categoryId = categoryId;
+        this.price = price;
+        this.comparePrice = comparePrice;
+        this.costPrice = costPrice;
+        this.trackInventory = trackInventory;
+        this.inventoryQuantity = inventoryQuantity;
+        this.allowBackorder = allowBackorder;
+        this.lowStockThreshold = lowStockThreshold;
+        this.weight = weight;
+        this.length = length;
+        this.width = width;
+        this.height = height;
+        this.metaTitle = metaTitle;
+        this.metaDescription = metaDescription;
+        this.featuredImageUrl = featuredImageUrl;
+        this.galleryImages = galleryImages;
+        this.status = status;
+        this.isFeatured = isFeatured;
+        this.isPriceHidden = isPriceHidden;
+    }
+
+    public String getName() {
         return name;
     }
 
-    public void setName(@NotBlank String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public @NotBlank String getSlug() {
+    public String getSlug() {
         return slug;
     }
 
-    public void setSlug(@NotBlank String slug) {
+    public void setSlug(String slug) {
         this.slug = slug;
     }
 
@@ -134,19 +166,19 @@ public class ProductCreateRequestDTO {
         this.sku = sku;
     }
 
-    public @NotNull Long getBrandId() {
+    public Long getBrandId() {
         return brandId;
     }
 
-    public void setBrandId(@NotNull Long brandId) {
+    public void setBrandId(Long brandId) {
         this.brandId = brandId;
     }
 
-    public @NotNull Long getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(@NotNull Long categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 

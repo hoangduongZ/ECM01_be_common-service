@@ -1,6 +1,6 @@
 package com.shop.ecommerce.service.product.impl;
 
-import com.shop.ecommerce.dtos.ProductResponseDTO;
+import com.shop.ecommerce.dtos.product.ProductResponseDTO;
 import com.shop.ecommerce.mapper.ProductMapper;
 import com.shop.ecommerce.model.Product;
 import com.shop.ecommerce.repository.ProductRepository;

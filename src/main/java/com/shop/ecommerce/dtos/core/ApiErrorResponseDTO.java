@@ -1,8 +1,10 @@
 package com.shop.ecommerce.dtos.core;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 public class ApiErrorResponseDTO {
@@ -12,6 +14,7 @@ public class ApiErrorResponseDTO {
     private String message;
     private String path;
     private List<FieldErrorDetail> errors;
+    @Schema(description = "Thời điểm lỗi", example = "2025-07-10T22:15:05.2666085")
     private LocalDateTime timestamp = LocalDateTime.now();
 
     public ApiErrorResponseDTO(String code, String message) {

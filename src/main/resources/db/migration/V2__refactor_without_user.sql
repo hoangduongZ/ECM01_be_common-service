@@ -106,7 +106,7 @@ CREATE TABLE products
     gallery_images      JSONB,          -- JSON array của URLs
 
     -- Trạng thái
-    status              VARCHAR(20) CHECK (status IN ('draft', 'active', 'inactive', 'out_of_stock')) DEFAULT 'draft',
+    status              VARCHAR(20) CHECK (status IN ('DRAFT', 'ACTIVE', 'INACTIVE', 'OUT_OF_STOCK')) DEFAULT 'DRAFT',
     is_featured         BOOLEAN                                                                       DEFAULT FALSE,
 
     -- Thống kê
@@ -511,55 +511,55 @@ CREATE INDEX idx_daily_stats_date ON daily_stats (date);
 -- =============================================
 
 -- Thêm thuộc tính cơ bản
-INSERT INTO attributes (name, slug, type, is_filterable)
-VALUES ('Kích thước', 'size', 'select', TRUE),
-       ('Màu sắc', 'color', 'select', TRUE),
-       ('Chất liệu', 'material', 'select', TRUE),
-       ('Xuất xứ', 'origin', 'select', TRUE);
-
--- Thêm giá trị thuộc tính
-INSERT INTO attribute_values (attribute_id, value)
-VALUES (1, 'S'),
-       (1, 'M'),
-       (1, 'L'),
-       (1, 'XL'),
-       (2, 'Đỏ'),
-       (2, 'Xanh'),
-       (2, 'Vàng'),
-       (2, 'Trắng'),
-       (2, 'Đen'),
-       (3, 'Cotton'),
-       (3, 'Polyester'),
-       (3, 'Silk'),
-       (3, 'Gỗ'),
-       (3, 'Gốm sứ'),
-       (4, 'Việt Nam'),
-       (4, 'Thái Lan'),
-       (4, 'Hàn Quốc'),
-       (4, 'Nhật Bản');
-
--- Thêm danh mục mẫu
-INSERT INTO categories (name, slug, description, is_active)
-VALUES ('Đồ lưu niệm truyền thống', 'do-luu-niem-truyen-thong', 'Các sản phẩm lưu niệm mang đậm nét văn hóa truyền thống', TRUE),
-       ('Quần áo & Phụ kiện', 'quan-ao-phu-kien', 'Quần áo và phụ kiện lưu niệm', TRUE),
-       ('Đồ trang trí', 'do-trang-tri', 'Các vật dụng trang trí nhà cửa', TRUE),
-       ('Đồ dùng hàng ngày', 'do-dung-hang-ngay', 'Các vật dụng thiết thực trong cuộc sống', TRUE);
-
--- Thêm thương hiệu mẫu
-INSERT INTO brands (name, slug, description, is_active)
-VALUES ('Vietnam Heritage', 'vietnam-heritage', 'Thương hiệu chuyên về đồ lưu niệm văn hóa Việt Nam', TRUE),
-       ('Handmade Vietnam', 'handmade-vietnam', 'Sản phẩm thủ công mỹ nghệ Việt Nam', TRUE),
-       ('Souvenir Plus', 'souvenir-plus', 'Thương hiệu đồ lưu niệm cao cấp', TRUE);
-
--- Thêm cài đặt hệ thống cơ bản
-INSERT INTO settings (key_name, value, description)
-VALUES ('site_name', 'Souvenir Shop', 'Tên website'),
-       ('site_email', 'info@souvenirshop.com', 'Email liên hệ'),
-       ('site_phone', '0123456789', 'Số điện thoại'),
-       ('currency', 'VND', 'Đơn vị tiền tệ'),
-       ('tax_rate', '10', 'Thuế VAT (%)'),
-       ('free_shipping_threshold', '500000', 'Miễn phí ship từ'),
-       ('inventory_tracking', 'true', 'Theo dõi tồn kho'),
-       ('allow_guest_checkout', 'true', 'Cho phép khách vãng lai mua hàng'),
-       ('default_currency', 'VND', 'Tiền tệ mặc định'),
-       ('items_per_page', '20', 'Số sản phẩm hiển thị mỗi trang');
+-- INSERT INTO attributes (name, slug, type, is_filterable)
+-- VALUES ('Kích thước', 'size', 'select', TRUE),
+--        ('Màu sắc', 'color', 'select', TRUE),
+--        ('Chất liệu', 'material', 'select', TRUE),
+--        ('Xuất xứ', 'origin', 'select', TRUE);
+--
+-- -- Thêm giá trị thuộc tính
+-- INSERT INTO attribute_values (attribute_id, value)
+-- VALUES (1, 'S'),
+--        (1, 'M'),
+--        (1, 'L'),
+--        (1, 'XL'),
+--        (2, 'Đỏ'),
+--        (2, 'Xanh'),
+--        (2, 'Vàng'),
+--        (2, 'Trắng'),
+--        (2, 'Đen'),
+--        (3, 'Cotton'),
+--        (3, 'Polyester'),
+--        (3, 'Silk'),
+--        (3, 'Gỗ'),
+--        (3, 'Gốm sứ'),
+--        (4, 'Việt Nam'),
+--        (4, 'Thái Lan'),
+--        (4, 'Hàn Quốc'),
+--        (4, 'Nhật Bản');
+--
+-- -- Thêm danh mục mẫu
+-- INSERT INTO categories (name, slug, description, is_active)
+-- VALUES ('Đồ lưu niệm truyền thống', 'do-luu-niem-truyen-thong', 'Các sản phẩm lưu niệm mang đậm nét văn hóa truyền thống', TRUE),
+--        ('Quần áo & Phụ kiện', 'quan-ao-phu-kien', 'Quần áo và phụ kiện lưu niệm', TRUE),
+--        ('Đồ trang trí', 'do-trang-tri', 'Các vật dụng trang trí nhà cửa', TRUE),
+--        ('Đồ dùng hàng ngày', 'do-dung-hang-ngay', 'Các vật dụng thiết thực trong cuộc sống', TRUE);
+--
+-- -- Thêm thương hiệu mẫu
+-- INSERT INTO brands (name, slug, description, is_active)
+-- VALUES ('Vietnam Heritage', 'vietnam-heritage', 'Thương hiệu chuyên về đồ lưu niệm văn hóa Việt Nam', TRUE),
+--        ('Handmade Vietnam', 'handmade-vietnam', 'Sản phẩm thủ công mỹ nghệ Việt Nam', TRUE),
+--        ('Souvenir Plus', 'souvenir-plus', 'Thương hiệu đồ lưu niệm cao cấp', TRUE);
+--
+-- -- Thêm cài đặt hệ thống cơ bản
+-- INSERT INTO settings (key_name, value, description)
+-- VALUES ('site_name', 'Souvenir Shop', 'Tên website'),
+--        ('site_email', 'info@souvenirshop.com', 'Email liên hệ'),
+--        ('site_phone', '0123456789', 'Số điện thoại'),
+--        ('currency', 'VND', 'Đơn vị tiền tệ'),
+--        ('tax_rate', '10', 'Thuế VAT (%)'),
+--        ('free_shipping_threshold', '500000', 'Miễn phí ship từ'),
+--        ('inventory_tracking', 'true', 'Theo dõi tồn kho'),
+--        ('allow_guest_checkout', 'true', 'Cho phép khách vãng lai mua hàng'),
+--        ('default_currency', 'VND', 'Tiền tệ mặc định'),
+--        ('items_per_page', '20', 'Số sản phẩm hiển thị mỗi trang');

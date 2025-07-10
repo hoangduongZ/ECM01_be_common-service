@@ -9,6 +9,8 @@ import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT p FROM Product p " +
@@ -41,6 +43,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
                                   @Param("inStock") Boolean inStock,
                                   Pageable pageable
     );
+
+    Optional<Product> findByUuid(UUID uuid);
 
     boolean existsBySlug(String slug);
 }

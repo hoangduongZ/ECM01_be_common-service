@@ -1,6 +1,6 @@
 package com.shop.ecommerce.service.product;
 
-import com.shop.ecommerce.dtos.ProductResponseDTO;
+import com.shop.ecommerce.dtos.product.ProductResponseDTO;
 import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;

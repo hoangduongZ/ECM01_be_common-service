@@ -1,10 +1,11 @@
 package com.shop.ecommerce.controller.product;
 
-import com.shop.ecommerce.dtos.ProductResponseDTO;
+import com.shop.ecommerce.dtos.core.ApiResponseDTO;
+import com.shop.ecommerce.dtos.product.ProductResponseDTO;
 import com.shop.ecommerce.dtos.core.ApiErrorResponseDTO;
-import com.shop.ecommerce.dtos.request.ProductCreateRequestDTO;
+import com.shop.ecommerce.dtos.product.request.ProductCreateRequestDTO;
+import com.shop.ecommerce.dtos.product.request.ProductUpdateRequestDTO;
 import com.shop.ecommerce.service.product.IProductAdminService;
-import com.shop.ecommerce.service.product.IProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -24,6 +25,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
+import java.util.Map;
+import java.util.UUID;
+
+import static com.fasterxml.jackson.databind.type.LogicalType.Map;
 
 /*
     CRUD product
@@ -46,7 +51,6 @@ public class ProductAdminController {
             @ApiResponse(responseCode = "400", description = "Invalid data",
                     content = @Content(schema = @Schema(implementation = ApiErrorResponseDTO.class)))
     })
-
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody ProductCreateRequestDTO requestDTO) {
         ProductResponseDTO createdProduct = productAdminService.create(requestDTO);
@@ -54,13 +58,29 @@ public class ProductAdminController {
         return ResponseEntity.created(location).body(createdProduct);
     }
 
+    @Operation(summary = "Update a product")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Product updated"),
+            @ApiResponse(responseCode = "400", description = "Invalid data",
+                    content = @Content(schema = @Schema(implementation = ApiErrorResponseDTO.class))),
+            @ApiResponse(responseCode = "404", description = "Product not found",
+                    content = @Content(schema = @Schema(implementation = ApiErrorResponseDTO.class)))
+    })
     @PutMapping("/{uuid}")
-    public ResponseEntity<?> update(@PathVariable String uuid) {
-        return null;
+    public ResponseEntity<ApiResponseDTO<ProductResponseDTO>> update(@PathVariable String uuid, @RequestBody @Valid ProductUpdateRequestDTO requestDTO) {
+        ProductResponseDTO productUpdated = productAdminService.update(UUID.fromString(uuid), requestDTO);
+        return ResponseEntity.ok(new ApiResponseDTO<>(productUpdated));
     }
 
+    @Operation(summary = "Delete a product")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Deleted success"),
+            @ApiResponse(responseCode = "404", description = "Product not found",
+                    content = @Content(schema = @Schema(implementation = ApiErrorResponseDTO.class)))
+    })
     @DeleteMapping("/{uuid}")
     public ResponseEntity<?> delete(@PathVariable String uuid) {
-        return null;
+        Boolean status = productAdminService.deleteProductById(UUID.fromString(uuid));
+        return ResponseEntity.ok(new ApiResponseDTO<>(java.util.Map.of("deleted", status)));
     }
 }

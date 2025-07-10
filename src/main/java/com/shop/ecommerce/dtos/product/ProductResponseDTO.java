@@ -1,4 +1,4 @@
-package com.shop.ecommerce.dtos;
+package com.shop.ecommerce.dtos.product;
 
 import com.shop.ecommerce.model.Product;
 

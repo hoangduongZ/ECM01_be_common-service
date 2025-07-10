@@ -1,7 +1,8 @@
 package com.shop.ecommerce.mapper;
 
-import com.shop.ecommerce.dtos.ProductResponseDTO;
-import com.shop.ecommerce.dtos.request.ProductCreateRequestDTO;
+import com.shop.ecommerce.dtos.product.ProductResponseDTO;
+import com.shop.ecommerce.dtos.product.request.ProductCreateRequestDTO;
+import com.shop.ecommerce.dtos.product.request.ProductUpdateRequestDTO;
 import com.shop.ecommerce.model.Product;
 import org.mapstruct.Mapper;
 
@@ -27,6 +28,19 @@ public abstract class ProductMapper {
         product.setDescription(dto.getDescription());
         product.setPrice(dto.getPrice());
         product.setComparePrice(dto.getComparePrice());
+        product.setPriceHidden(false);
+        return product;
+    }
+
+    public Product productUpdateToEntity(ProductUpdateRequestDTO dto){
+        Product product = new Product();
+        product.setName(dto.getName());
+        product.setSlug(dto.getSlug());
+        product.setShortDescription(dto.getShortDescription());
+        product.setDescription(dto.getDescription());
+        product.setPrice(dto.getPrice());
+        product.setPriceHidden(false);
+        product.setStatus(dto.getStatus());
         return product;
     }
 }

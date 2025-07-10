@@ -1,11 +1,6 @@
-INSERT INTO roles (name, description)
-VALUES ('Admin', 'Quản trị viên hệ thống'),
-       ('Customer', 'Khách hàng'),
-       ('Staff', 'Nhân viên');
-
 -- Thêm cài đặt hệ thống cơ bản
 INSERT INTO settings (key_name, value, description)
-VALUES ('site_name', 'Souvenir Shop', 'Tên website'),
+VALUES ('site_name', 'Ecommerce Shop', 'Tên website'),
        ('site_email', 'info@souvenirshop.com', 'Email liên hệ'),
        ('site_phone', '0123456789', 'Số điện thoại'),
        ('currency', 'VND', 'Đơn vị tiền tệ'),
